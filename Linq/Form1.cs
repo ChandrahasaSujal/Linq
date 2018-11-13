@@ -16,5 +16,11 @@ namespace Linq
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            CS4DBDataContext dc = new CS4DBDataContext();
+            dataGridView1.DataSource = dc.Customers;
+        }
     }
 }
