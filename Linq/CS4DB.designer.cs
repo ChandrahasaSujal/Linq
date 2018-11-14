@@ -82,11 +82,13 @@ namespace Linq
 		
 		private int _Custid;
 		
-		private string _Cname;
+		private string _Name;
+		
+		private string _City;
 		
 		private System.Nullable<decimal> _Balance;
 		
-		private System.Nullable<bool> _Status;
+		private bool _Status;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -94,11 +96,13 @@ namespace Linq
     partial void OnCreated();
     partial void OnCustidChanging(int value);
     partial void OnCustidChanged();
-    partial void OnCnameChanging(string value);
-    partial void OnCnameChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnCityChanging(string value);
+    partial void OnCityChanged();
     partial void OnBalanceChanging(System.Nullable<decimal> value);
     partial void OnBalanceChanged();
-    partial void OnStatusChanging(System.Nullable<bool> value);
+    partial void OnStatusChanging(bool value);
     partial void OnStatusChanged();
     #endregion
 		
@@ -127,27 +131,47 @@ namespace Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cname", DbType="VarChar(50)")]
-		public string Cname
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
 		{
 			get
 			{
-				return this._Cname;
+				return this._Name;
 			}
 			set
 			{
-				if ((this._Cname != value))
+				if ((this._Name != value))
 				{
-					this.OnCnameChanging(value);
+					this.OnNameChanging(value);
 					this.SendPropertyChanging();
-					this._Cname = value;
-					this.SendPropertyChanged("Cname");
-					this.OnCnameChanged();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Balance", DbType="Decimal(9,2)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(50)")]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this.OnCityChanging(value);
+					this.SendPropertyChanging();
+					this._City = value;
+					this.SendPropertyChanged("City");
+					this.OnCityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Balance", DbType="Money")]
 		public System.Nullable<decimal> Balance
 		{
 			get
@@ -167,8 +191,8 @@ namespace Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Bit")]
-		public System.Nullable<bool> Status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Bit NOT NULL")]
+		public bool Status
 		{
 			get
 			{
